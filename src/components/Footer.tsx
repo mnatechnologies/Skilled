@@ -13,7 +13,7 @@ export function Footer() {
           {/* About */}
           <div>
             <Image
-              src="/skilled/fulllogo_transparent.png"
+              src="/skilled/fulllogo_transparent_nobuffer.png"
               alt={siteConfig.businessName}
               width={160}
               height={45}

@@ -37,7 +37,7 @@ export function Navigation() {
           {/* Logo */}
           <a href="#home" className="flex items-center">
             <Image
-              src="/skilled/fulllogo_transparent.png"
+              src="/skilled/fulllogo_transparent_nobuffer.png"
               alt={siteConfig.businessName}
               width={180}
               height={50}
