@@ -8,33 +8,40 @@ export function FAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   return (
-    <section id="faq" className="py-20 bg-gray-50">
+    <section id="faq" className="py-20 bg-white">
       <div className="container mx-auto px-4">
-        <h2 className="text-4xl font-bold text-center text-teal-900 mb-4">
-          Frequently Asked Questions
-        </h2>
-        <p className="text-center text-gray-600 mb-12 max-w-2xl mx-auto">
-          Get answers to common questions about NDIS Support Coordination
-        </p>
+        <div className="text-center mb-14">
+          <span className="text-gold text-sm font-bold uppercase tracking-widest">
+            FAQ
+          </span>
+          <h2 className="text-3xl md:text-4xl font-extrabold text-dark mt-3 mb-4">
+            Common <span className="text-gradient-gold">Questions</span>
+          </h2>
+          <p className="text-gray-500 max-w-2xl mx-auto">
+            Everything you need to know about our demolition services.
+          </p>
+        </div>
 
-        <div className="max-w-4xl mx-auto space-y-4">
+        <div className="max-w-3xl mx-auto space-y-3">
           {siteConfig.faqs.map((faq, index) => (
             <div
               key={index}
-              className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow"
+              className="border border-gray-200 rounded-lg overflow-hidden hover:border-gold/50 transition-colors"
             >
               <button
-                onClick={() => setOpenIndex(openIndex === index ? null : index)}
+                onClick={() =>
+                  setOpenIndex(openIndex === index ? null : index)
+                }
                 className="w-full px-6 py-5 text-left flex justify-between items-center gap-4 hover:bg-gray-50 transition-colors"
               >
-                <span className="font-semibold text-teal-900 text-lg">
+                <span className="font-bold text-dark">
                   {faq.question}
                 </span>
                 <ChevronDown
-                  className={`flex-shrink-0 text-orange-500 transition-transform ${
+                  className={`flex-shrink-0 text-gold transition-transform duration-300 ${
                     openIndex === index ? "rotate-180" : ""
                   }`}
-                  size={24}
+                  size={22}
                 />
               </button>
               <div
@@ -42,7 +49,7 @@ export function FAQ() {
                   openIndex === index ? "max-h-96" : "max-h-0"
                 }`}
               >
-                <p className="px-6 pb-5 text-gray-600 leading-relaxed">
+                <p className="px-6 pb-5 text-gray-500 leading-relaxed">
                   {faq.answer}
                 </p>
               </div>

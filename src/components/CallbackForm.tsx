@@ -1,7 +1,8 @@
 "use client";
 
 import { useState, FormEvent } from "react";
-import { Check } from "lucide-react";
+import { Check, Phone, Mail, MapPin } from "lucide-react";
+import { siteConfig } from "@/config/site";
 
 export function CallbackForm() {
   const [submitted, setSubmitted] = useState(false);
@@ -11,7 +12,6 @@ export function CallbackForm() {
     const formData = new FormData(e.currentTarget);
     const data = Object.fromEntries(formData.entries());
 
-    // Lead qualification scoring (for internal use)
     const leadScore = calculateLeadScore(data);
 
     console.log("Form submitted:", {
@@ -21,150 +21,170 @@ export function CallbackForm() {
       qualificationNotes: leadScore.notes,
     });
 
-    // Here you would send this data to your API/CRM
     setSubmitted(true);
 
-    // Reset after 3 seconds
     setTimeout(() => {
       setSubmitted(false);
       (e.target as HTMLFormElement).reset();
     }, 3000);
   };
 
-  // Lead scoring logic (adjust weights based on your priorities)
-  const calculateLeadScore = (data: any) => {
+  const calculateLeadScore = (data: Record<string, FormDataEntryValue>) => {
     let score = 0;
-    const notes = [];
+    const notes: string[] = [];
 
-    // NDIS Plan Status (30 points)
-    if (data["ndis-status"] === "yes-plan") {
+    if (data["project-type"] === "residential") {
+      score += 25;
+      notes.push("Residential demo");
+    } else if (data["project-type"] === "commercial") {
       score += 30;
-      notes.push("Active NDIS participant");
-    } else if (data["ndis-status"] === "approved-no-plan") {
-      score += 25;
-      notes.push("NDIS approved, needs plan");
-    } else if (data["ndis-status"] === "applying") {
-      score += 15;
-      notes.push("Currently applying");
-    } else if (data["ndis-status"] === "not-yet") {
-      score += 5;
-      notes.push("Not yet applied");
-    }
-
-    // Support Type (25 points)
-    if (data["support-type"] === "support-coordination") {
-      score += 25;
-      notes.push("Specifically wants support coordination");
-    } else if (data["support-type"] === "specialist-coordination") {
-      score += 25;
-      notes.push("High-value specialist coordination need");
-    } else if (data["support-type"] === "plan-management") {
+      notes.push("Commercial demo - high value");
+    } else if (data["project-type"] === "strip-out") {
       score += 20;
-      notes.push("Plan management interest");
-    } else if (data["support-type"] === "not-sure") {
-      score += 10;
-      notes.push("Needs guidance on services");
+      notes.push("Strip out project");
     }
 
-    // Previous Coordinator (20 points)
-    if (data["previous-coordinator"] === "yes-switching") {
+    if (data["timeline"] === "urgent") {
+      score += 25;
+      notes.push("Urgent - high priority");
+    } else if (data["timeline"] === "1-month") {
       score += 20;
-      notes.push("Looking to switch - likely experienced participant");
-    } else if (data["previous-coordinator"] === "no") {
-      score += 15;
-      notes.push("First-time coordination client");
-    }
-
-    // Urgency/Challenge (15 points)
-    if (data["current-challenge"] === "urgent") {
-      score += 15;
-      notes.push("Urgent need - high priority");
-    } else if (data["current-challenge"] === "soon") {
+      notes.push("Within 1 month");
+    } else if (data["timeline"] === "3-months") {
       score += 10;
-      notes.push("Starting soon");
-    } else if (data["current-challenge"] === "planning") {
-      score += 5;
-      notes.push("Planning ahead");
+      notes.push("Within 3 months");
     }
 
-    // Preferred time provided (10 points) - shows engagement
-    if (data["preferred-time"]) {
+    if (data["budget"]) {
+      score += 15;
+      notes.push("Budget provided");
+    }
+
+    if (data.phone) {
       score += 10;
-      notes.push("Provided preferred contact time");
+      notes.push("Phone provided");
     }
 
-    // Location provided (optional but helpful)
-    if (data.location) {
-      notes.push(`Location: ${data.location}`);
-    }
-
-    // Determine lead quality
     let quality = "Low";
-    if (score >= 70) quality = "High";
-    else if (score >= 50) quality = "Medium";
+    if (score >= 60) quality = "High";
+    else if (score >= 35) quality = "Medium";
 
     return { score, quality, notes };
   };
 
   return (
-    <section id="contact" className="py-20 bg-gradient-to-br from-teal-900 via-teal-800 to-teal-900 text-white">
+    <section
+      id="contact"
+      className="py-20 bg-dark text-white"
+    >
       <div className="container mx-auto px-4">
-        <div className="grid md:grid-cols-2 gap-12 items-start">
+        <div className="grid lg:grid-cols-2 gap-12 items-start max-w-6xl mx-auto">
           {/* Info Side */}
           <div>
-            <h2 className="text-4xl font-bold mb-6">Ready to Get Started?</h2>
-            <p className="text-lg mb-8 opacity-90">
-              Request a call back and one of our experienced Support Coordinators will contact you within 24 hours to discuss your needs.
+            <span className="text-gold text-sm font-bold uppercase tracking-widest">
+              Get Started
+            </span>
+            <h2 className="text-3xl md:text-4xl font-extrabold mt-3 mb-6">
+              Request a{" "}
+              <span className="text-gradient-gold">Free Quote</span>
+            </h2>
+            <p className="text-gray-400 text-lg mb-8 leading-relaxed">
+              Tell us about your project and we&apos;ll get back to you within
+              24 hours with a detailed, no-obligation quote.
             </p>
 
-            <ul className="space-y-4">
+            <ul className="space-y-4 mb-10">
               {[
-                "Free initial consultation",
-                "No obligation discussion",
-                "Expert advice and guidance",
-                "Australia wide service",
+                "Free site assessment & quote",
+                "No hidden fees or surprises",
+                "Fully licensed & insured team",
+                "We handle all council permits",
               ].map((benefit, index) => (
                 <li key={index} className="flex items-center gap-3">
-                  <div className="flex-shrink-0 w-6 h-6 bg-yellow-400 rounded-full flex items-center justify-center">
-                    <Check className="text-teal-900" size={16} />
+                  <div className="flex-shrink-0 w-6 h-6 bg-gold rounded-full flex items-center justify-center">
+                    <Check className="text-dark" size={14} />
                   </div>
-                  <span className="text-lg">{benefit}</span>
+                  <span className="text-gray-300">{benefit}</span>
                 </li>
               ))}
             </ul>
+
+            <div className="space-y-4 border-t border-gray-800 pt-8">
+              <a
+                href={`tel:${siteConfig.phone.replace(/\s/g, "")}`}
+                className="flex items-center gap-3 text-gray-300 hover:text-gold transition-colors"
+              >
+                <Phone size={20} className="text-gold" />
+                {siteConfig.phone}
+              </a>
+              <a
+                href={`mailto:${siteConfig.email}`}
+                className="flex items-center gap-3 text-gray-300 hover:text-gold transition-colors"
+              >
+                <Mail size={20} className="text-gold" />
+                {siteConfig.email}
+              </a>
+              <div className="flex items-center gap-3 text-gray-300">
+                <MapPin size={20} className="text-gold" />
+                {siteConfig.address}
+              </div>
+            </div>
           </div>
 
           {/* Form Side */}
           <div className="bg-white rounded-lg p-8 shadow-2xl">
             {submitted ? (
               <div className="text-center py-12">
-                <div className="w-20 h-20 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-6">
-                  <Check className="text-white" size={40} />
+                <div className="w-20 h-20 bg-gold rounded-full flex items-center justify-center mx-auto mb-6">
+                  <Check className="text-dark" size={40} />
                 </div>
-                <h3 className="text-2xl font-bold text-teal-900 mb-2">
+                <h3 className="text-2xl font-bold text-dark mb-2">
                   Thank You!
                 </h3>
-                <p className="text-gray-600">
-                  We'll contact you within 24 hours.
+                <p className="text-gray-500">
+                  We&apos;ll be in touch within 24 hours.
                 </p>
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-5">
-                <div>
-                  <label htmlFor="name" className="block text-sm font-semibold text-gray-700 mb-2">
-                    Full Name *
-                  </label>
-                  <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    required
-                    className="w-full px-4 py-3 border-2 border-gray-200 rounded-md focus:border-orange-500 focus:outline-none text-gray-900 transition-colors"
-                  />
+                <div className="grid sm:grid-cols-2 gap-5">
+                  <div>
+                    <label
+                      htmlFor="name"
+                      className="block text-sm font-semibold text-gray-700 mb-2"
+                    >
+                      Full Name *
+                    </label>
+                    <input
+                      type="text"
+                      id="name"
+                      name="name"
+                      required
+                      className="w-full px-4 py-3 border-2 border-gray-200 rounded focus:border-gold focus:outline-none text-gray-900 transition-colors"
+                    />
+                  </div>
+                  <div>
+                    <label
+                      htmlFor="phone"
+                      className="block text-sm font-semibold text-gray-700 mb-2"
+                    >
+                      Phone *
+                    </label>
+                    <input
+                      type="tel"
+                      id="phone"
+                      name="phone"
+                      required
+                      className="w-full px-4 py-3 border-2 border-gray-200 rounded focus:border-gold focus:outline-none text-gray-900 transition-colors"
+                    />
+                  </div>
                 </div>
 
                 <div>
-                  <label htmlFor="email" className="block text-sm font-semibold text-gray-700 mb-2">
+                  <label
+                    htmlFor="email"
+                    className="block text-sm font-semibold text-gray-700 mb-2"
+                  >
                     Email Address *
                   </label>
                   <input
@@ -172,143 +192,94 @@ export function CallbackForm() {
                     id="email"
                     name="email"
                     required
-                    className="w-full px-4 py-3 border-2 border-gray-200 rounded-md focus:border-orange-500 focus:outline-none text-gray-900 transition-colors"
+                    className="w-full px-4 py-3 border-2 border-gray-200 rounded focus:border-gold focus:outline-none text-gray-900 transition-colors"
                   />
                 </div>
 
                 <div>
-                  <label htmlFor="phone" className="block text-sm font-semibold text-gray-700 mb-2">
-                    Phone Number *
+                  <label
+                    htmlFor="project-type"
+                    className="block text-sm font-semibold text-gray-700 mb-2"
+                  >
+                    Type of Project *
                   </label>
-                  <input
-                    type="tel"
-                    id="phone"
-                    name="phone"
+                  <select
+                    id="project-type"
+                    name="project-type"
                     required
-                    className="w-full px-4 py-3 border-2 border-gray-200 rounded-md focus:border-orange-500 focus:outline-none text-gray-900 transition-colors"
-                  />
+                    className="w-full px-4 py-3 border-2 border-gray-200 rounded focus:border-gold focus:outline-none text-gray-900 transition-colors"
+                  >
+                    <option value="">Please select</option>
+                    <option value="residential">
+                      Residential Demolition
+                    </option>
+                    <option value="commercial">
+                      Commercial Demolition
+                    </option>
+                    <option value="strip-out">Strip Out / Gutting</option>
+                    <option value="asbestos">Asbestos Removal</option>
+                    <option value="rubbish">Rubbish Removal</option>
+                    <option value="other">Other</option>
+                  </select>
                 </div>
 
                 <div>
-                  <label htmlFor="location" className="block text-sm font-semibold text-gray-700 mb-2">
-                    Location
+                  <label
+                    htmlFor="timeline"
+                    className="block text-sm font-semibold text-gray-700 mb-2"
+                  >
+                    When do you need this done?
+                  </label>
+                  <select
+                    id="timeline"
+                    name="timeline"
+                    className="w-full px-4 py-3 border-2 border-gray-200 rounded focus:border-gold focus:outline-none text-gray-900 transition-colors"
+                  >
+                    <option value="">Please select</option>
+                    <option value="urgent">ASAP</option>
+                    <option value="1-month">Within 1 month</option>
+                    <option value="3-months">Within 3 months</option>
+                    <option value="planning">Just getting quotes</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label
+                    htmlFor="location"
+                    className="block text-sm font-semibold text-gray-700 mb-2"
+                  >
+                    Project Location
                   </label>
                   <input
                     type="text"
                     id="location"
                     name="location"
-                    placeholder="City or postcode"
-                    className="w-full px-4 py-3 border-2 border-gray-200 rounded-md focus:border-orange-500 focus:outline-none text-gray-900 transition-colors"
+                    placeholder="Suburb or postcode"
+                    className="w-full px-4 py-3 border-2 border-gray-200 rounded focus:border-gold focus:outline-none text-gray-900 transition-colors"
                   />
                 </div>
 
-                {/* Qualifying Questions - Feel helpful, not salesy */}
-                <div className="pt-2 border-t border-gray-200">
-                  <p className="text-sm text-gray-600 mb-4">Help us understand how we can best support you:</p>
-
-                  <div className="mb-5">
-                    <label htmlFor="ndis-status" className="block text-sm font-semibold text-gray-700 mb-2">
-                      Do you currently have an NDIS plan? *
-                    </label>
-                    <select
-                      id="ndis-status"
-                      name="ndis-status"
-                      required
-                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-md focus:border-orange-500 focus:outline-none text-gray-900 transition-colors"
-                    >
-                      <option value="">Please select</option>
-                      <option value="yes-plan">Yes, I have an active NDIS plan</option>
-                      <option value="approved-no-plan">I'm approved but need help creating my plan</option>
-                      <option value="applying">I'm currently applying for NDIS</option>
-                      <option value="not-yet">Not yet, I'm exploring my options</option>
-                    </select>
-                  </div>
-
-                  <div className="mb-5">
-                    <label htmlFor="support-type" className="block text-sm font-semibold text-gray-700 mb-2">
-                      What type of support are you looking for? *
-                    </label>
-                    <select
-                      id="support-type"
-                      name="support-type"
-                      required
-                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-md focus:border-orange-500 focus:outline-none text-gray-900 transition-colors"
-                    >
-                      <option value="">Please select</option>
-                      <option value="support-coordination">Support Coordination</option>
-                      <option value="specialist-coordination">Specialist Support Coordination</option>
-                      <option value="plan-management">Plan Management</option>
-                      <option value="not-sure">I'm not sure yet - need guidance</option>
-                    </select>
-                  </div>
-
-                  <div className="mb-5">
-                    <label htmlFor="previous-coordinator" className="block text-sm font-semibold text-gray-700 mb-2">
-                      Have you worked with a Support Coordinator before?
-                    </label>
-                    <select
-                      id="previous-coordinator"
-                      name="previous-coordinator"
-                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-md focus:border-orange-500 focus:outline-none text-gray-900 transition-colors"
-                    >
-                      <option value="">Please select</option>
-                      <option value="no">No, this is my first time</option>
-                      <option value="yes-switching">Yes, I'm looking to switch coordinators</option>
-                      <option value="yes-additional">Yes, but I need additional support</option>
-                    </select>
-                  </div>
-
-                  <div className="mb-5">
-                    <label htmlFor="current-challenge" className="block text-sm font-semibold text-gray-700 mb-2">
-                      When are you looking to get started?
-                    </label>
-                    <select
-                      id="current-challenge"
-                      name="current-challenge"
-                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-md focus:border-orange-500 focus:outline-none text-gray-900 transition-colors"
-                    >
-                      <option value="">Please select</option>
-                      <option value="urgent">As soon as possible</option>
-                      <option value="soon">Within the next few weeks</option>
-                      <option value="planning">Just planning ahead for now</option>
-                    </select>
-                  </div>
-                </div>
-
                 <div>
-                  <label htmlFor="message" className="block text-sm font-semibold text-gray-700 mb-2">
-                    Tell us a bit more about your situation (optional)
+                  <label
+                    htmlFor="message"
+                    className="block text-sm font-semibold text-gray-700 mb-2"
+                  >
+                    Project Details (optional)
                   </label>
                   <textarea
                     id="message"
                     name="message"
-                    rows={4}
-                    placeholder="Any additional information that would help us assist you better..."
-                    className="w-full px-4 py-3 border-2 border-gray-200 rounded-md focus:border-orange-500 focus:outline-none text-gray-900 transition-colors resize-none"
+                    rows={3}
+                    placeholder="Tell us about your project..."
+                    className="w-full px-4 py-3 border-2 border-gray-200 rounded focus:border-gold focus:outline-none text-gray-900 transition-colors resize-none"
                   />
-                </div>
-
-                <div>
-                  <label htmlFor="preferred-time" className="block text-sm font-semibold text-gray-700 mb-2">
-                    Preferred Call Time
-                  </label>
-                  <select
-                    id="preferred-time"
-                    name="preferred-time"
-                    className="w-full px-4 py-3 border-2 border-gray-200 rounded-md focus:border-orange-500 focus:outline-none text-gray-900 transition-colors"
-                  >
-                    <option value="">Select a time</option>
-                    <option value="morning">Morning (9am - 12pm)</option>
-                    <option value="afternoon">Afternoon (12pm - 5pm)</option>
-                    <option value="evening">Evening (5pm - 7pm)</option>
-                  </select>
                 </div>
 
                 <button
                   type="submit"
-                  className="w-full bg-orange-500 text-white px-8 py-4 rounded-md font-semibold text-lg hover:bg-orange-600 transition-all hover:scale-105 shadow-lg"
+                  className="w-full bg-gold text-dark px-8 py-4 rounded font-bold text-lg uppercase tracking-wider hover:bg-gold-light transition-all hover:scale-[1.02] shadow-lg"
                 >
-                  Request Call Back
+                  Get My Free Quote
                 </button>
               </form>
             )}

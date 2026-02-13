@@ -1,39 +1,70 @@
 import { Phone, Mail, MapPin, Facebook, Instagram, Linkedin } from "lucide-react";
 import { siteConfig } from "@/config/site";
+import Image from "next/image";
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-gray-900 text-white py-16">
-      <div className="container mx-auto px-4">
-        <div className="grid md:grid-cols-4 gap-8 mb-8">
-          {/* About Section */}
+    <footer className="bg-dark-alt text-white">
+      {/* Main Footer */}
+      <div className="container mx-auto px-4 py-16">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-10">
+          {/* About */}
           <div>
-            <h3 className="text-xl font-bold mb-4">{siteConfig.businessName}</h3>
-            <p className="text-gray-400 leading-relaxed mb-4">
-              Expert NDIS Support Coordination services across Australia, helping you navigate your NDIS journey with confidence.
+            <Image
+              src="/skilled/fulllogo_transparent.png"
+              alt={siteConfig.businessName}
+              width={160}
+              height={45}
+              className="h-10 w-auto mb-5"
+            />
+            <p className="text-gray-400 text-sm leading-relaxed mb-4">
+              Professional demolition services across Sydney. Fully licensed,
+              insured, and committed to safe, efficient project delivery.
             </p>
-            <p className="text-sm">
-              <strong>NDIS Registration:</strong><br />
-              <span className="text-gray-400">{siteConfig.ndisRegistration}</span>
+            <p className="text-xs text-gray-600">
+              {siteConfig.licence} | ABN: {siteConfig.abn}
             </p>
+          </div>
+
+          {/* Services */}
+          <div>
+            <h4 className="font-bold text-gold uppercase tracking-wider text-sm mb-5">
+              Services
+            </h4>
+            <ul className="space-y-2.5">
+              {siteConfig.services.map((service) => (
+                <li key={service.title}>
+                  <a
+                    href="#services"
+                    className="text-gray-400 text-sm hover:text-gold transition-colors"
+                  >
+                    {service.title}
+                  </a>
+                </li>
+              ))}
+            </ul>
           </div>
 
           {/* Quick Links */}
           <div>
-            <h4 className="text-lg font-bold mb-4">Quick Links</h4>
-            <ul className="space-y-2">
+            <h4 className="font-bold text-gold uppercase tracking-wider text-sm mb-5">
+              Quick Links
+            </h4>
+            <ul className="space-y-2.5">
               {[
+                { href: "#home", label: "Home" },
                 { href: "#services", label: "Services" },
-                { href: "#eligibility", label: "Eligibility" },
+                { href: "#process", label: "How It Works" },
+                { href: "#areas", label: "Service Areas" },
                 { href: "#faq", label: "FAQ" },
                 { href: "#contact", label: "Contact" },
               ].map((link) => (
                 <li key={link.href}>
                   <a
                     href={link.href}
-                    className="text-gray-400 hover:text-yellow-400 transition-colors"
+                    className="text-gray-400 text-sm hover:text-gold transition-colors"
                   >
                     {link.label}
                   </a>
@@ -42,76 +73,79 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* Contact Info */}
+          {/* Contact */}
           <div>
-            <h4 className="text-lg font-bold mb-4">Contact Us</h4>
-            <ul className="space-y-3">
-              <li className="flex items-center gap-3">
-                <Phone size={16} className="text-gray-400 flex-shrink-0" />
+            <h4 className="font-bold text-gold uppercase tracking-wider text-sm mb-5">
+              Contact Us
+            </h4>
+            <ul className="space-y-3 mb-6">
+              <li>
                 <a
-                  href={`tel:${siteConfig.phone.replace(/\s/g, '')}`}
-                  className="text-gray-400 hover:text-yellow-400 transition-colors"
+                  href={`tel:${siteConfig.phone.replace(/\s/g, "")}`}
+                  className="flex items-center gap-3 text-gray-400 text-sm hover:text-gold transition-colors"
                 >
+                  <Phone size={16} className="text-gold flex-shrink-0" />
                   {siteConfig.phone}
                 </a>
               </li>
-              <li className="flex items-center gap-3">
-                <Mail size={16} className="text-gray-400 flex-shrink-0" />
+              <li>
                 <a
                   href={`mailto:${siteConfig.email}`}
-                  className="text-gray-400 hover:text-yellow-400 transition-colors"
+                  className="flex items-center gap-3 text-gray-400 text-sm hover:text-gold transition-colors"
                 >
+                  <Mail size={16} className="text-gold flex-shrink-0" />
                   {siteConfig.email}
                 </a>
               </li>
-              <li className="flex items-center gap-3">
-                <MapPin size={16} className="text-gray-400 flex-shrink-0" />
-                <span className="text-gray-400">{siteConfig.serviceArea}</span>
+              <li className="flex items-center gap-3 text-gray-400 text-sm">
+                <MapPin size={16} className="text-gold flex-shrink-0" />
+                {siteConfig.address}
               </li>
             </ul>
-          </div>
 
-          {/* Social Links */}
-          <div>
-            <h4 className="text-lg font-bold mb-4">Follow Us</h4>
-            <div className="flex gap-4">
-              <a
-                href={siteConfig.social.facebook}
-                className="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-orange-500 transition-all hover:scale-110"
-                aria-label="Facebook"
-              >
-                <Facebook size={20} />
-              </a>
-              <a
-                href={siteConfig.social.instagram}
-                className="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-orange-500 transition-all hover:scale-110"
-                aria-label="Instagram"
-              >
-                <Instagram size={20} />
-              </a>
-              <a
-                href={siteConfig.social.linkedin}
-                className="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-orange-500 transition-all hover:scale-110"
-                aria-label="LinkedIn"
-              >
-                <Linkedin size={20} />
-              </a>
+            <div className="flex gap-3">
+              {[
+                { href: siteConfig.social.facebook, Icon: Facebook, label: "Facebook" },
+                { href: siteConfig.social.instagram, Icon: Instagram, label: "Instagram" },
+                { href: siteConfig.social.linkedin, Icon: Linkedin, label: "LinkedIn" },
+              ].map(({ href, Icon, label }) => (
+                <a
+                  key={label}
+                  href={href}
+                  className="w-9 h-9 bg-dark rounded flex items-center justify-center hover:bg-gold hover:text-dark transition-all"
+                  aria-label={label}
+                >
+                  <Icon size={16} />
+                </a>
+              ))}
             </div>
           </div>
         </div>
+      </div>
 
-        {/* Bottom Bar */}
-        <div className="border-t border-gray-800 pt-8 text-center text-gray-400 text-sm">
-          <p>
-            © {currentYear} {siteConfig.businessName}. All rights reserved. |{" "}
-            <a href="#" className="hover:text-yellow-400 transition-colors underline">
-              Privacy Policy
-            </a>{" "}
-            |{" "}
-            <a href="#" className="hover:text-yellow-400 transition-colors underline">
-              Terms of Service
-            </a>
-          </p>
+      {/* Bottom Bar */}
+      <div className="border-t border-gray-800">
+        <div className="container mx-auto px-4 py-5">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-3 text-xs text-gray-500">
+            <p>
+              &copy; {currentYear} {siteConfig.businessName}. All rights
+              reserved.
+            </p>
+            <div className="flex gap-4">
+              <a
+                href="#"
+                className="hover:text-gold transition-colors"
+              >
+                Privacy Policy
+              </a>
+              <a
+                href="#"
+                className="hover:text-gold transition-colors"
+              >
+                Terms of Service
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </footer>
