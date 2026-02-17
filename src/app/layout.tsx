@@ -18,7 +18,7 @@ export const metadata: Metadata = {
   title:
     "Skilled Demo | Sydney Demolition Experts — Residential & Commercial Demolition",
   description:
-    "Professional demolition services in Sydney. Residential & commercial demolition, strip outs, asbestos removal, and rubbish removal. Fully licensed & insured. Free quotes.",
+    "Professional demolition services in Sydney. Residential & commercial demolition, strip outs, asbestos removal, and rubbish removal. Fully insured. Free quotes.",
 };
 
 export default function RootLayout({

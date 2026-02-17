@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, FormEvent } from "react";
-import { Phone, Mail, MapPin, Check, ArrowRight } from "lucide-react";
+import { Phone, Mail, MapPin, Check, ArrowRight, Shield } from "lucide-react";
 import { siteConfig } from "@/config/site";
 
 export function ComingSoon() {
@@ -92,9 +92,14 @@ export function ComingSoon() {
                 Coming.
               </h2>
 
+              {/* Motto */}
+              <p className="text-gold italic text-xl sm:text-2xl font-semibold font-[family-name:var(--font-raleway)] mb-6 tracking-wide">
+                {siteConfig.motto}
+              </p>
+
               <p className="text-gray-400 text-lg sm:text-xl leading-relaxed max-w-md mb-10">
                 Sydney&apos;s newest demolition experts are gearing up.
-                Professional, licensed, and ready to deliver.
+                Professional, insured, and ready to deliver.
               </p>
 
               {/* Contact details */}
@@ -202,6 +207,32 @@ export function ComingSoon() {
                           />
                         </div>
 
+                        <div className="grid sm:grid-cols-2 gap-5">
+                          <div>
+                            <input
+                              type="text"
+                              name="location"
+                              required
+                              placeholder="Project location (suburb) *"
+                              className="w-full bg-transparent border-b border-white/10 focus:border-gold px-0 py-3 text-white placeholder:text-gray-600 focus:outline-none transition-colors text-sm"
+                            />
+                          </div>
+                          <div>
+                            <select
+                              name="project-type"
+                              required
+                              defaultValue=""
+                              className="w-full bg-transparent border-b border-white/10 focus:border-gold px-0 py-3 text-white focus:outline-none transition-colors text-sm appearance-none cursor-pointer [&>option]:bg-dark-alt [&>option]:text-white [&:invalid]:text-gray-600"
+                            >
+                              <option value="" disabled className="text-gray-600">
+                                Project type *
+                              </option>
+                              <option value="residential">Residential</option>
+                              <option value="commercial">Commercial</option>
+                            </select>
+                          </div>
+                        </div>
+
                         <div>
                           <textarea
                             name="message"
@@ -232,6 +263,12 @@ export function ComingSoon() {
                             </>
                           )}
                         </button>
+
+                        {/* Privacy notice */}
+                        <p className="flex items-start gap-2 text-gray-500 text-xs leading-relaxed pt-1">
+                          <Shield size={14} className="text-gold/60 flex-shrink-0 mt-0.5" />
+                          Your information is safe with us. We only use your details to respond to your enquiry and will never share them with third parties.
+                        </p>
                       </form>
                     </>
                   )}
@@ -250,7 +287,7 @@ export function ComingSoon() {
             rights reserved.
           </p>
           <p className="text-gray-600 text-xs tracking-wider">
-            {siteConfig.licence} &middot; ABN {siteConfig.abn}
+            ABN {siteConfig.abn}
           </p>
         </div>
       </footer>

@@ -113,7 +113,7 @@ export function CallbackForm() {
               {[
                 "Free site assessment & quote",
                 "No hidden fees or surprises",
-                "Fully licensed & insured team",
+                "Fully insured team",
                 "We handle all council permits",
               ].map((benefit, index) => (
                 <li key={index} className="flex items-center gap-3">

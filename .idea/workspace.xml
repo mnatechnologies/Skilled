@@ -4,13 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f254fa3a-07b7-40ab-93c2-b3cac59bfa92" name="Changes" comment="Rebrand application to &quot;Skilled Demo&quot;&#10;&#10;- Update site configuration for demolition services, including new copy, services, and FAQs&#10;- Implement gold and dark color theme in `globals.css` with new animations&#10;- Add branding assets under `public/skilled/`&#10;- Refactor `Hero`, `Navigation`, `Services`, and `Footer` components to match new branding&#10;- Add `ValueProps`, `Testimonials`, and `ServiceAreas` components&#10;- Update `CallbackForm` with demolition-specific fields and lead scoring logic&#10;- Update project metadata and dependencies">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+    <list default="true" id="f254fa3a-07b7-40ab-93c2-b3cac59bfa92" name="Changes" comment="Switch to Coming Soon mode and implement contact API&#10;&#10;- Add `ComingSoon` component with branding, contact info, and enquiry form&#10;- Replace home page content with `ComingSoon` view&#10;- Implement `/api/contact` route using AWS SES for email delivery&#10;- Update `CallbackForm` to submit data to the contact API with loading states&#10;- Add `@aws-sdk/client-ses` and update Next.js dependency">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/layout.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/CallbackForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/CallbackForm.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/ComingSoon.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ComingSoon.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Footer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Footer.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/config/site.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/config/site.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -18,7 +18,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="EmbeddingIndexingInfo">
-    <option name="cachedIndexableFilesCount" value="61" />
+    <option name="cachedIndexableFilesCount" value="67" />
     <option name="fileBasedEmbeddingIndicesEnabled" value="true" />
   </component>
   <component name="Git.Settings">
@@ -38,29 +38,29 @@
     <option name="openDirectoriesWithSingleClick" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.MCP Project settings loaded": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
-    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
-    "git-widget-placeholder": "main",
-    "javascript.preferred.runtime.type.id": "node",
-    "js.debugger.nextJs.config.created.client": "true",
-    "js.debugger.nextJs.config.created.server": "true",
-    "junie.onboarding.icon.badge.shown": "true",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "to.speed.mode.migration.done": "true",
-    "ts.external.directory.path": "/Users/markmekhayl/WebstormProjects/Skilled/node_modules/typescript/lib",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.MCP Project settings loaded&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;javascript.preferred.runtime.type.id&quot;: &quot;node&quot;,
+    &quot;js.debugger.nextJs.config.created.client&quot;: &quot;true&quot;,
+    &quot;js.debugger.nextJs.config.created.server&quot;: &quot;true&quot;,
+    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;/Users/markmekhayl/WebstormProjects/Skilled/node_modules/typescript/lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="npm.Next.js: server-side">
     <configuration name="Next.js: debug client-side" type="JavascriptDebugType" uri="http://localhost:3000/">
       <method v="2" />
@@ -92,7 +92,8 @@
       <updated>1770946952069</updated>
       <workItem from="1770946953177" duration="770000" />
       <workItem from="1770952384171" duration="2141000" />
-      <workItem from="1771285265154" duration="1355000" />
+      <workItem from="1771285265154" duration="1441000" />
+      <workItem from="1771364479679" duration="478000" />
     </task>
     <task id="LOCAL-00001" summary="Rebrand application to &quot;Skilled Demo&quot;&#10;&#10;- Update site configuration for demolition services, including new copy, services, and FAQs&#10;- Implement gold and dark color theme in `globals.css` with new animations&#10;- Add branding assets under `public/skilled/`&#10;- Refactor `Hero`, `Navigation`, `Services`, and `Footer` components to match new branding&#10;- Add `ValueProps`, `Testimonials`, and `ServiceAreas` components&#10;- Update `CallbackForm` with demolition-specific fields and lead scoring logic&#10;- Update project metadata and dependencies">
       <option name="closed" value="true" />
@@ -102,7 +103,15 @@
       <option name="project" value="LOCAL" />
       <updated>1770958707218</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Switch to Coming Soon mode and implement contact API&#10;&#10;- Add `ComingSoon` component with branding, contact info, and enquiry form&#10;- Replace home page content with `ComingSoon` view&#10;- Implement `/api/contact` route using AWS SES for email delivery&#10;- Update `CallbackForm` to submit data to the contact API with loading states&#10;- Add `@aws-sdk/client-ses` and update Next.js dependency">
+      <option name="closed" value="true" />
+      <created>1771286837129</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1771286837129</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -121,6 +130,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Rebrand application to &quot;Skilled Demo&quot;&#10;&#10;- Update site configuration for demolition services, including new copy, services, and FAQs&#10;- Implement gold and dark color theme in `globals.css` with new animations&#10;- Add branding assets under `public/skilled/`&#10;- Refactor `Hero`, `Navigation`, `Services`, and `Footer` components to match new branding&#10;- Add `ValueProps`, `Testimonials`, and `ServiceAreas` components&#10;- Update `CallbackForm` with demolition-specific fields and lead scoring logic&#10;- Update project metadata and dependencies" />
-    <option name="LAST_COMMIT_MESSAGE" value="Rebrand application to &quot;Skilled Demo&quot;&#10;&#10;- Update site configuration for demolition services, including new copy, services, and FAQs&#10;- Implement gold and dark color theme in `globals.css` with new animations&#10;- Add branding assets under `public/skilled/`&#10;- Refactor `Hero`, `Navigation`, `Services`, and `Footer` components to match new branding&#10;- Add `ValueProps`, `Testimonials`, and `ServiceAreas` components&#10;- Update `CallbackForm` with demolition-specific fields and lead scoring logic&#10;- Update project metadata and dependencies" />
+    <MESSAGE value="Switch to Coming Soon mode and implement contact API&#10;&#10;- Add `ComingSoon` component with branding, contact info, and enquiry form&#10;- Replace home page content with `ComingSoon` view&#10;- Implement `/api/contact` route using AWS SES for email delivery&#10;- Update `CallbackForm` to submit data to the contact API with loading states&#10;- Add `@aws-sdk/client-ses` and update Next.js dependency" />
+    <option name="LAST_COMMIT_MESSAGE" value="Switch to Coming Soon mode and implement contact API&#10;&#10;- Add `ComingSoon` component with branding, contact info, and enquiry form&#10;- Replace home page content with `ComingSoon` view&#10;- Implement `/api/contact` route using AWS SES for email delivery&#10;- Update `CallbackForm` to submit data to the contact API with loading states&#10;- Add `@aws-sdk/client-ses` and update Next.js dependency" />
   </component>
 </project>

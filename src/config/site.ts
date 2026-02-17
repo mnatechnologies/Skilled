@@ -8,7 +8,7 @@ export const siteConfig = {
   address: "Sydney, NSW",
   serviceArea: "Servicing All of Sydney & Surrounds",
   abn: "XX XXX XXX XXX",
-  licence: "Lic. XXXXXXX",
+  motto: "Beyond Demolition, Creating Opportunities",
 
   // Colors
   colors: {
@@ -31,7 +31,7 @@ export const siteConfig = {
   hero: {
     title: "Sydney's Trusted Demolition Experts",
     subtitle:
-      "Professional residential & commercial demolition services. Safe, efficient, and fully licensed — delivering results that exceed expectations.",
+      "Professional residential & commercial demolition services. Safe, efficient, and fully insured — delivering results that exceed expectations.",
     stats: [
       { value: "500+", label: "Projects Completed" },
       { value: "15+", label: "Years Experience" },
@@ -42,9 +42,9 @@ export const siteConfig = {
   // Value Props (inspired by cheapestloadofrubbish)
   valueProps: [
     {
-      title: "Fully Licensed",
+      title: "Fully Insured",
       description:
-        "All work carried out by qualified, licensed demolition professionals.",
+        "All work carried out by qualified, insured demolition professionals.",
       icon: "shield",
     },
     {
@@ -96,7 +96,7 @@ export const siteConfig = {
     {
       title: "Asbestos Removal",
       description:
-        "Licensed asbestos identification, removal, and disposal following all NSW SafeWork regulations and guidelines.",
+        "Professional asbestos identification, removal, and disposal following all NSW SafeWork regulations and guidelines.",
       icon: "alert",
     },
     {
@@ -171,17 +171,17 @@ export const siteConfig = {
     {
       question: "Do you handle asbestos removal?",
       answer:
-        "Yes, we are fully licensed for asbestos identification and removal in NSW. If asbestos is found during assessment, we follow all SafeWork NSW regulations for safe removal and disposal. This is included as part of our complete demolition service.",
+        "Yes, we are fully qualified for asbestos identification and removal in NSW. If asbestos is found during assessment, we follow all SafeWork NSW regulations for safe removal and disposal. This is included as part of our complete demolition service.",
     },
     {
       question: "What happens to the demolition waste?",
       answer:
-        "We're committed to sustainability. Up to 90% of demolition materials are recycled or repurposed — including concrete, timber, metal, and bricks. All waste is sorted on-site and disposed of at licensed facilities in compliance with EPA regulations.",
+        "We're committed to sustainability. Up to 90% of demolition materials are recycled or repurposed — including concrete, timber, metal, and bricks. All waste is sorted on-site and disposed of at approved facilities in compliance with EPA regulations.",
     },
     {
       question: "Are you fully insured?",
       answer:
-        "Absolutely. We carry comprehensive public liability insurance and workers' compensation for all our team members. We're also fully licensed by NSW Fair Trading. Copies of our insurance certificates are available upon request.",
+        "Absolutely. We carry comprehensive public liability insurance and workers' compensation for all our team members. We're fully insured and registered with NSW Fair Trading. Copies of our insurance certificates are available upon request.",
     },
   ],
 

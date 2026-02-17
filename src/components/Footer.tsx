@@ -20,11 +20,11 @@ export function Footer() {
               className="h-10 w-auto mb-5"
             />
             <p className="text-gray-400 text-sm leading-relaxed mb-4">
-              Professional demolition services across Sydney. Fully licensed,
-              insured, and committed to safe, efficient project delivery.
+              Professional demolition services across Sydney. Fully insured
+              and committed to safe, efficient project delivery.
             </p>
             <p className="text-xs text-gray-600">
-              {siteConfig.licence} | ABN: {siteConfig.abn}
+              ABN: {siteConfig.abn}
             </p>
           </div>
 
