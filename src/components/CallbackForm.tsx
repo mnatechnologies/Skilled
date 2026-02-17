@@ -6,27 +6,43 @@ import { siteConfig } from "@/config/site";
 
 export function CallbackForm() {
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState("");
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setSubmitting(true);
+    setError("");
+
     const formData = new FormData(e.currentTarget);
     const data = Object.fromEntries(formData.entries());
-
     const leadScore = calculateLeadScore(data);
 
-    console.log("Form submitted:", {
-      ...data,
-      leadQuality: leadScore.quality,
-      leadScore: leadScore.score,
-      qualificationNotes: leadScore.notes,
-    });
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          ...data,
+          leadQuality: leadScore.quality,
+          leadScore: leadScore.score,
+        }),
+      });
 
-    setSubmitted(true);
+      if (!response.ok) {
+        throw new Error("Failed to send message");
+      }
 
-    setTimeout(() => {
-      setSubmitted(false);
-      (e.target as HTMLFormElement).reset();
-    }, 3000);
+      setSubmitted(true);
+      setTimeout(() => {
+        setSubmitted(false);
+        (e.target as HTMLFormElement).reset();
+      }, 3000);
+    } catch {
+      setError("Something went wrong. Please try again or call us directly.");
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   const calculateLeadScore = (data: Record<string, FormDataEntryValue>) => {
@@ -275,11 +291,16 @@ export function CallbackForm() {
                   />
                 </div>
 
+                {error && (
+                  <p className="text-red-600 text-sm font-medium">{error}</p>
+                )}
+
                 <button
                   type="submit"
-                  className="w-full bg-gold text-dark px-8 py-4 rounded font-bold text-lg uppercase tracking-wider hover:bg-gold-light transition-all hover:scale-[1.02] shadow-lg"
+                  disabled={submitting}
+                  className="w-full bg-gold text-dark px-8 py-4 rounded font-bold text-lg uppercase tracking-wider hover:bg-gold-light transition-all hover:scale-[1.02] shadow-lg disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
                 >
-                  Get My Free Quote
+                  {submitting ? "Sending..." : "Get My Free Quote"}
                 </button>
               </form>
             )}

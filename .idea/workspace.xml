@@ -4,21 +4,25 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f254fa3a-07b7-40ab-93c2-b3cac59bfa92" name="Changes" comment="Rebrand application to &quot;Skilled Demo&quot;&#10;&#10;- Update site configuration for demolition services, including new copy, services, and FAQs&#10;- Implement gold and dark color theme in `globals.css` with new animations&#10;- Add branding assets under `public/skilled/`&#10;- Refactor `Hero`, `Navigation`, `Services`, and `Footer` components to match new branding&#10;- Add `ValueProps`, `Testimonials`, and `ServiceAreas` components&#10;- Update `CallbackForm` with demolition-specific fields and lead scoring logic&#10;- Update project metadata and dependencies" />
+    <list default="true" id="f254fa3a-07b7-40ab-93c2-b3cac59bfa92" name="Changes" comment="Rebrand application to &quot;Skilled Demo&quot;&#10;&#10;- Update site configuration for demolition services, including new copy, services, and FAQs&#10;- Implement gold and dark color theme in `globals.css` with new animations&#10;- Add branding assets under `public/skilled/`&#10;- Refactor `Hero`, `Navigation`, `Services`, and `Footer` components to match new branding&#10;- Add `ValueProps`, `Testimonials`, and `ServiceAreas` components&#10;- Update `CallbackForm` with demolition-specific fields and lead scoring logic&#10;- Update project metadata and dependencies">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/CallbackForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/CallbackForm.tsx" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="EmbeddingIndexingInfo">
-    <option name="cachedIndexableFilesCount" value="63" />
+    <option name="cachedIndexableFilesCount" value="61" />
     <option name="fileBasedEmbeddingIndicesEnabled" value="true" />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-  </component>
-  <component name="GithubDefaultAccount">
-    <option name="defaultAccountId" value="7ce99a8f-d3ac-4c56-88b3-3da537685ff2" />
   </component>
   <component name="McpProjectServerCommands">
     <commands />
@@ -53,6 +57,7 @@
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "to.speed.mode.migration.done": "true",
+    "ts.external.directory.path": "/Users/markmekhayl/WebstormProjects/Skilled/node_modules/typescript/lib",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -87,6 +92,7 @@
       <updated>1770946952069</updated>
       <workItem from="1770946953177" duration="770000" />
       <workItem from="1770952384171" duration="2141000" />
+      <workItem from="1771285265154" duration="1355000" />
     </task>
     <task id="LOCAL-00001" summary="Rebrand application to &quot;Skilled Demo&quot;&#10;&#10;- Update site configuration for demolition services, including new copy, services, and FAQs&#10;- Implement gold and dark color theme in `globals.css` with new animations&#10;- Add branding assets under `public/skilled/`&#10;- Refactor `Hero`, `Navigation`, `Services`, and `Footer` components to match new branding&#10;- Add `ValueProps`, `Testimonials`, and `ServiceAreas` components&#10;- Update `CallbackForm` with demolition-specific fields and lead scoring logic&#10;- Update project metadata and dependencies">
       <option name="closed" value="true" />
